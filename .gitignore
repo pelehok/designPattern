@@ -1,1 +1,14 @@
 # Created by .ignore support plugin (hsz.mobi)
+/.idea/.idea.Patterns/.idea
+/.idea/.idea.Patterns
+/.vs/Patterns
+/Bridge
+/Bridge.Abstraction
+/Bridge.Net
+/Bridge.VB
+/BuildingPlanner.Core/bin/Debug
+/BuildingPlanner.Core/obj/Debug
+/BuildingPlanner.Core/Properties
+/PlannerUI/bin/Debug
+/PlannerUI/obj/Debug
+/PlannerUI/Properties

@@ -7,7 +7,8 @@ namespace BuildingPlanner.Core.Models
 		public Room(Shape shape)
 		{
 			Shape = shape;
-		}
+            name = "room";
+        }
 		
 		public override string ToString()
 		{

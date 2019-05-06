@@ -7,6 +7,7 @@ namespace BuildingPlanner.Core.Models
 		public Furniture(Shape shape)
 		{
 			Shape = shape;
-		}
+            name = "furniture";
+        }
 	}
 }

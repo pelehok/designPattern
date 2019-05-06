@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace BuildingPlanner.Core.Abstraction
@@ -7,7 +8,7 @@ namespace BuildingPlanner.Core.Abstraction
 		protected List<Component> _components = new List<Component>();
 		protected Shape Shape { get; set; }
 		
-		public override double Square => Shape.Square;
+		public override float Square => Shape.Square;
 		
 		public override void Add(Component c)
 		{
@@ -29,5 +30,18 @@ namespace BuildingPlanner.Core.Abstraction
 
 			return roomsSquare;
 		}
-	}
+
+        public override string Display(int depth)
+        {
+            string display = "";
+
+            display = new String('*', depth) +" "+ name+"\r\n";
+            foreach (Component component in _components)
+            {
+                display += (component.Display(depth + 2)+ "\r\n");
+            }
+
+            return display;
+        }
+    }
 }

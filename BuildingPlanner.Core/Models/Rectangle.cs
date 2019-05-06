@@ -4,9 +4,9 @@ namespace BuildingPlanner.Core.Models
 {
 	public class Rectangle : Shape
 	{
-		public double Height { get; set; }
-		public double Width { get; set; }
+		public float Height { get; set; }
+		public float Width { get; set; }
 
-		public double Square => Height * Width;
+		public float Square => Height * Width;
 	}
 }
