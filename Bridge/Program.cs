@@ -14,16 +14,22 @@ namespace Bridge
 			
 			var calculator = new Calculator(data);
 			calculator.Operations = new Sum();
-			Console.WriteLine("Sum = "+calculator.Calculate());
+            var sum = calculator.Calculate();
+            Console.WriteLine("Sum = "+ sum);
 			
 			calculator.Operations = new Subtract();
-			Console.WriteLine("Sub = "+calculator.Calculate());
+            var sub = calculator.Calculate();
+            Console.WriteLine("Sub = "+sub);
+
+            var calculator1 = new Calculator(new Data(sum,sub));
+            calculator1.Operations = new Multiplication();
+			Console.WriteLine("Mult = "+ calculator1.Calculate());
 			
-			calculator.Operations = new Multiplication();
-			Console.WriteLine("Mult = "+calculator.Calculate());
-			
-			calculator.Operations = new Division();
-			Console.WriteLine("Div = "+calculator.Calculate());
-		}
+			calculator1.Operations = new Division();
+			Console.WriteLine("Div = "+ calculator1.Calculate());
+
+            Console.ReadKey();
+        }
+
 	}
 }

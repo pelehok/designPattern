@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BuildingPlanner.Core.Models;
-using Rectangle = BuildingPlanner.Core.Models.Rectangle;
+using PlannerUI.Models;
+using Rectangle = PlannerUI.Models.Shapes.Rectangle;
+using Component = PlannerUI.Abstraction.Component;
 
 namespace PlannerUI
 {
@@ -20,22 +22,56 @@ namespace PlannerUI
         {
             InitializeComponent();
             var flatShape = new Rectangle()
-            {
-                Height = flatPanel.Size.Height,
-                Width = flatPanel.Size.Width
-            };
+                            {
+                                Location = new Point(0,0),
+                                Height = flatPanel.Size.Height-1,
+                                Width = flatPanel.Size.Width-1
+                            };
             Flat = new Flat(flatShape);
-            DrawTree();
+            PrintTree();
+            Draw();
         }
 
-        private void DrawTree()
+        private void PrintTree()
         {
             flatTree.Text = Flat.Display(1);
         }
 
-        private void AddComponent()
+        private void AddComponent(Flat c)
         {
+            var component = Flat.GetComponentLieIn(c);
+            var room = component as Flat;
+            if (room != null)
+            {
+                component.Add(new Room(new Rectangle()
+                {
+                    Location = c.Rectangle.Location,
+                    Height = c.Rectangle.Height,
+                    Width = c.Rectangle.Width
+                }));
+            }
+            else if(component is Room)
+            {
+                component.Add(new Furniture(new Rectangle()
+                {
+                    Location = c.Rectangle.Location,
+                    Height = c.Rectangle.Height,
+                    Width = c.Rectangle.Width
+                }));
+            }
+            else
+            {
+                errorLds.Text = "You can't add this shape";
+            }
+            Draw();
+            PrintTree();
+        }
 
+        private void Draw()
+        {
+            Graphics g = flatPanel.CreateGraphics();
+            g.Clear(Color.AliceBlue);
+            Flat.Draw(g);
         }
 
         //----------------------------------------------------------------
@@ -45,11 +81,18 @@ namespace PlannerUI
         private void flatPanel_MouseDown(object sender, MouseEventArgs e)
         {
             pointStart = new Point(e.X,e.Y);
+            errorLds.Text = "";
         }
 
         private void flatPanel_MouseUp(object sender, MouseEventArgs e)
         {
             pointEnd = new Point(e.X, e.Y);
+            AddComponent(new Flat(new Rectangle()
+                                    {
+                                        Location = pointStart,
+                                        Height = pointEnd.Y-pointStart.Y,
+                                        Width = pointEnd.X-pointStart.X
+                                    }));
         }
     }
 }

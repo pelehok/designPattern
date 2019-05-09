@@ -30,10 +30,12 @@
         {
             this.flatPanel = new System.Windows.Forms.Panel();
             this.flatTree = new System.Windows.Forms.Label();
+            this.errorLds = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // flatPanel
             // 
+            this.flatPanel.BackColor = System.Drawing.SystemColors.Window;
             this.flatPanel.Location = new System.Drawing.Point(12, 12);
             this.flatPanel.Name = "flatPanel";
             this.flatPanel.Size = new System.Drawing.Size(1054, 593);
@@ -49,11 +51,20 @@
             this.flatTree.Size = new System.Drawing.Size(0, 17);
             this.flatTree.TabIndex = 2;
             // 
+            // errorLds
+            // 
+            this.errorLds.AutoSize = true;
+            this.errorLds.Location = new System.Drawing.Point(1085, 588);
+            this.errorLds.Name = "errorLds";
+            this.errorLds.Size = new System.Drawing.Size(0, 17);
+            this.errorLds.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1445, 617);
+            this.Controls.Add(this.errorLds);
             this.Controls.Add(this.flatTree);
             this.Controls.Add(this.flatPanel);
             this.Name = "Form1";
@@ -67,6 +78,7 @@
 
         private System.Windows.Forms.Panel flatPanel;
         private System.Windows.Forms.Label flatTree;
+        private System.Windows.Forms.Label errorLds;
     }
 }
 
